@@ -30,22 +30,35 @@
         }
         .card-container {
           display: flex;
-          justify-content: space-between;
-          width: 1000px;
+          justify-content: center;
+          gap:1rem;
+          max-width: 1000px;
           margin: auto;
         }
         .card {
-          width: 400px;
-          padding: 20px;
+          min-width: 100px;
+          padding: 1rem;
           border: 1px solid #ccc;
           text-align: center;
+        }
+        @media (max-width: 480px) {
+          .card-container {
+            flex-direction: column; /* Stack cards vertically on small screens */
+            align-items: center; /* Center horizontally */
+          }
+
+          .card {
+            width: 100%; /* Set width to 100% to take full width of the container */
+            margin-bottom: 1rem; /* Add margin between stacked cards */
+          }
         }
         .module {
           cursor: pointer;
           margin:1rem;
           padding: 1rem;
           background-color: lightblue;
-          box-shadow: #555;
+          /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+          min-width: 80%;
         }
         #page2 {
           border: 2px white solid;
