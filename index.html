@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Modules</title>
+    <style>
+        * {
+            font-family: 'Arial Narrow', Arial, sans-serif;
+            box-sizing: border-box;
+            margin: 0;
+        }
+        body {
+            background-color: azure;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            }
+        h1 {
+            text-align: center;
+            margin: 2rem;
+        }
+        p {
+          font-size: 18px;
+        }
+        iframe {
+          aspect-ratio: 16/9;
+          height: auto;
+        }
+        .card-container {
+          display: flex;
+          justify-content: space-between;
+          width: 1000px;
+          margin: auto;
+        }
+        .card {
+          width: 400px;
+          padding: 20px;
+          border: 1px solid #ccc;
+          text-align: center;
+        }
+        .module {
+          cursor: pointer;
+          margin:1rem;
+          padding: 1rem;
+          background-color: lightblue;
+          box-shadow: #555;
+        }
+        #page2 {
+          border: 2px white solid;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height:100vh;
+        }
+        .loading {
+          position: absolute;
+          top: 40%;
+          left:40%;
+          color: #333;
+          font-weight: 700;
+          border: 2px white solid;
+          text-align: center;
+          width: 200px;
+          background-color: lightblue;
+          padding: 1rem;
+          font-size: 1.5rem;
+        }
+      </style>
+</head>
+<body>
+  <div id="page1">
+    <h1>Course Modules for Review</h1>
+    <div class="card-container">
+        <div class="card" id = 'med'>
+          <h2>Medical Courses 1</h2>
+          <p id = 'the-arm' class = 'module' onclick="openCourse('https://v1q1.c10.e2-4.dev/mastercard/The Arm/story.html')">The Arm</p>
+        </div>
+        <div class="card" id = 'eng'>
+          <h2>Engineering Courses</h2>
+          <p id = 'land-level' class = 'module' onclick="openCourse('https://v1q1.c10.e2-4.dev/mastercard/Landlevelling%20and%20GradingB/index.html')">Land Levelling</p>         
+        </div>
+      </div>
+  </div>
+<div id="page2">
+  <p id= 'loadP' class="loading">Loading...</p>
+</div>
+
+<script>
+  let loadingMessage = document.getElementById('loadP');
+  loadingMessage.style.display = 'none';
+  function openCourse(course){
+    let page1 = document.getElementById('page1');
+    page1.style.display = 'none';
+
+    let card = document.getElementById('page2');
+    let iframe = document.createElement('iframe');
+    loadingMessage.style.display = 'block';
+  
+    iframe.src = course; 
+    iframe.style.width = '100%';
+    iframe.style.height = '540px'; // Set the height as per your requirement 
+    card.appendChild(iframe);
+
+    iframe.onload = function() {
+        loadingMessage.style.display='none';
+      };
+  }
+</script>        
+   
+</body>
+</html>
