@@ -17,6 +17,23 @@
             justify-content: center;
             align-items: center;
             }
+          .heading {
+            display: flex;
+            align-items: center; /* Align items vertically */
+            justify-content: space-between; /* Add space between heading and button */
+          }
+
+
+          .heading button {
+            margin-left: auto; /* Push the button to the right */
+            padding: 0.5rem 1rem ;
+            font-size: 18px;
+            background-color: #333;
+            color: #ccc;
+            font-weight: bold;
+            cursor: pointer;
+          }
+
         h1 {
             text-align: center;
             margin: 2rem;
@@ -67,6 +84,37 @@
           align-items: center;
           height:100vh;
         }
+        .modules-container {
+          display: none; /* Initially hide the modules container */
+        }
+
+        .modules-container .column {
+          float: left; /* Float the columns to create a two-column layout */
+        }
+
+        .engineering-column {
+          width: 66.66%; /* Two-thirds of the row */
+        }
+
+        .medical-column {
+          width: 33.33%; /* One-third of the row */
+        }
+
+        .modules-container .column h2 {
+          margin-bottom: 10px; /* Add some spacing below the headings */
+        }
+        .module-list {
+          font-size: 18px;
+          line-height: 1.5; /* Adjust the line spacing as desired */
+          text-transform: capitalize; /* Capitalize the first letter of each word */
+        }
+
+        .module-list a {
+          color: black;
+          text-decoration: none;
+        }
+
+
         .loading {
           position: absolute;
           top: 40%;
@@ -84,7 +132,11 @@
 </head>
 <body>
   <div id="page1">
-    <h1>Course Modules for Review</h1>
+    <div class="heading">
+      <h1>Course Modules for Review</h1>
+      <button>All Modules</button>
+    </div>
+
     <div class="card-container">
         <div class="card" id = 'med'>
           <h2>Medical Courses</h2>
@@ -106,7 +158,35 @@
                    
           <p id = 'drip' class = 'module' onclick="openCourse('https://v1q1.c10.e2-4.dev/mastercard/DRIP IRRGATION DESIGN/story.html')">Drip Irrigation Systems Design and Management</p>         -->
         </div> 
+    </div>
+    <div class="modules-container">
+      <div class="column medical-column">
+        <h2>Medical</h2>
+        <ol class="module-list">
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/brachial-plexus-all-v1/index.html">Brachial Plexus</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/Cubital%20fossa/story.html">Cubital Fossa</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/Elbow/story.html">Elbow Joint</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/Forearm/story.html">Forearm</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/Radioulnar/story.html">Radioulnar joints</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/ShoulderJoints/index.html">Shoulder Joints</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/The%20Arm/story.html">The Arm</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/The%20Wrist/story.html">Wrist Joint</a></li>
+        </ol>
       </div>
+      <div class="column engineering-column">
+        <h2>Engineering</h2>
+        <ol class="module-list">
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/IRRIGATION%20IN%20A%20CONTROLLED%20ENVIRONMENT/story.html">Irrigation in a Controlled Environment</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/Sprinkler%20System%20Design%20Procedures/index.html">Sprinkler System Design Procedures</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/DRIP%20IRRGATION%20DESIGN/story.html">Drip Irrigation Design</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/Landlevelling and GradingB/index.html">Irrigation and Drainage System Design and Management</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/irrigation and drainage system design/index.html">IRRIGATION SYSTEM DESIGN (SPRINKLER and DRIP)</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/Measurement%20of%20Irrigation%20Water%20and%20Delivery%20Rates/index.html">MEASUREMENT OF IRRIGATION WATER AND DELIVERY RATES</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/DETERMINATION OF UNIFORMITY COEFFICIENT(CATCH-CAN METHOD)/story.html">DETERMINATION OF   UNIFORMITY COEFFICIENT(CATCH-CAN METHOD)</a></li>
+           <li><a target="_blank" href="https://v1q1.c10.e2-4.dev/mastercard/INFILTRATION/index.html">Determination of infiltration rate using the double ring method</a></li>
+        </ol>
+      </div>
+    </div>
   </div>
 <div id="page2">
   <p id= 'loadP' class="loading">Loading...</p>
@@ -115,6 +195,33 @@
 <script>
   let loadingMessage = document.getElementById('loadP');
   loadingMessage.style.display = 'none';
+
+  const moduleListItems = document.querySelectorAll('.module-list li');
+
+  moduleListItems.forEach((item) => {
+    const link = item.querySelector('a');
+    const text = link.textContent.toLowerCase();
+    link.innerHTML = text.charAt(0).toUpperCase() + text.slice(1);
+  });
+
+  const toggleButton  = document.querySelector('.heading button');
+  const modulesContainer = document.querySelector('.modules-container');
+  const cardContainer = document.querySelector('.card-container');
+
+
+  toggleButton.addEventListener('click', () => {
+    if (toggleButton.innerText === 'All Modules') {
+      toggleButton.innerText = 'Modules for Review';
+      modulesContainer.style.display = 'block';
+      cardContainer.style.display = 'none';
+    } else {
+      toggleButton.innerText = 'All Modules';
+      modulesContainer.style.display = 'none';
+      cardContainer.style.display = 'block';
+    }
+  });
+
+  
   function openCourse(course){
     let page1 = document.getElementById('page1');
     page1.style.display = 'none';
